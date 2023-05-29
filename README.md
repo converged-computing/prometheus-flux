@@ -5,10 +5,6 @@
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 [![PyPI](https://img.shields.io/pypi/v/prometheus-flux)](https://pypi.org/project/prometheus-flux/)
 
-<a target="_blank" rel="noopener noreferrer" href="https://github.com/converged-computing/prometheus-flux/blob/main/docs/assets/img/logo-transparent.png">
-    <img align="right" style="width: 250px; float: right; padding-left: 20px;" src="https://github.com/converged-computing/prometheus-flux/raw/main/docs/assets/img/logo-transparent.png" alt="Prometheus Flux Logo">
-</a>
-
 Export Prometheus metrics about Flux.
 
 🚧️ **under development** 🚧️
@@ -66,7 +62,7 @@ $ prometheus-flux start --port 9000 --host 127.0.0.1
 ```
 
 As an example, when Flux is running with no jobs (and default options are used) we can open
-the browser to [http://localhost:8080/metrics](http://localhost:8080/metrics) to see:
+the browser to [http://localhost:8080/metrics/](http://localhost:8080/metrics) to see:
 
 ```console
 # HELP flux_queue_state_counts Gauge for the counting job states in the queue.
@@ -147,6 +143,24 @@ flux_node_counts{state="free"} 4.0
 Note that we are testing this to help with an autoscaler for Kubernetes, meaning
 the metrics will be used to determine if we should make a request to scale or shrink
 a cluster.
+
+### Docker
+
+We have a docker container, which you can customize for your use case, but it's more intended to
+be a demo. You can either build it yourself, or use our build.
+
+```bash
+$ docker build -t promflux .
+$ docker run -it -p 8080:8080 promflux
+```
+or
+
+```bash
+$ docker run -it -p 8080:8080 ghcr.io/converged-computing/prometheus-flux
+```
+
+You can then open up the browser at [http://localhost:8080/metrics/](http://localhost:8080/metrics) to see
+the metrics!
 
 ## 😁️ Contributors 😁️
 
