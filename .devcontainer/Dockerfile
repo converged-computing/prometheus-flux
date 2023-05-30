@@ -12,13 +12,11 @@ ENV USER_GID=${USER_GID}
 
 USER root
 RUN apt-get update
-COPY .github/requirements-dev.txt /dev-requirements.txt
-COPY requirements.txt /requirements.txt
+COPY .github/requirements-dev.txt /requirements.txt
 
 # For easier Python development.
 RUN python3 -m pip install IPython && \
-    python3 -m pip install -r /requirements.txt && \
-    python3 -m pip install -r /dev-requirements.txt
+    python3 -m pip install -r /requirements.txt
 
 # Assuming installing to /usr/local
 ENV LD_LIBRARY_PATH=/usr/local/lib
